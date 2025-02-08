@@ -1,59 +1,6 @@
 #!/usr/bin/env bash
 
-set -xe  # Enable debugging and exit on failure
-
-echo "Checking Operating Sytem"
-# Detect the OS
-OS_TYPE=$(uname -s)
-
-# Function to check if a command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
-
-if [[ "$OS_TYPE" == "Darwin" ]]; then
-    echo "Running on macOS..."
-    
-    
-    # Ensure Ollama is installed
-    if ! command_exists ollama; then
-        echo "Ollama not found. Installing via Homebrew..."
-        
-
-        # Ensure Homebrew is installed
-        if ! command_exists brew; then
-            echo "Homebrew not found. Installing..."
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        fi
-
-        brew install ollama
-    fi
-
-else
-    echo "Unsupported OS: $OS_TYPE"
-    exit 1
-fi
-
-
-echo "Checking if Ollama is running:"
-# Get the process ID of 'ollama serve'
-OLLAMA_PID=$(pgrep -f 'ollama serve')
-
-# If OLLAMA_PID is empty, start Ollama and get the new PID
-if [ -z "$OLLAMA_PID" ]; then
-    echo "Starting Ollama"
-    /bin/ollama serve &  # Run Ollama in the background
-    sleep 2  # Give some time for Ollama to start
-    OLLAMA_PID=$(pgrep -f 'ollama serve')
-else 
-    echo "Ollama is running"
-fi
-
-# If it's still not running, exit with an error
-if [ -z "$OLLAMA_PID" ]; then
-    echo "Ollama binary not running. Exiting."
-    exit 1
-fi
+-set xe
 
 echo "Pulling required LLMs"
 # Define the required models
@@ -84,7 +31,7 @@ if [ -f "GenBotcast.py" ]; then
     echo "GenBot File exists."
 else
     echo "Bot-cast not found. Pulling with curl..."
-    curl -L -o GenBotcast.py "https://raw.githubusercontent.com/damienbuie/copy_substack/refs/heads/main/GenBotcast_published_20250201.py"
+    curl -L -o GenBotcast.py "https://raw.githubusercontent.com/damienbuie/edgeinnovation_substack/refs/heads/main/bot-cast/GenBotcast.py"
 
     if [ $? -eq 0 ]; then
         echo "Download successful."
