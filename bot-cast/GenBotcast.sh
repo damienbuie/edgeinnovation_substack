@@ -4,7 +4,7 @@
 
 echo "Pulling required LLMs"
 # Define the required models
-REQUIRED_MODELS=("gemma:7b" "mistral:latest" "deepseek-r1:8b" )
+REQUIRED_MODELS=("llama3" "mistral:latest" "deepseek-r1:8b" )
 
 # Function to get a list of installed models
 get_installed_models() {
@@ -58,8 +58,8 @@ echo "Running the Bot-Casts!"
 echo "Mistal & Mistral host a Bot-cast"
 time python3 GenBotcast.py --host mistral --guest mistral > bot-cast_mistral_v_mistral.txt
 
-echo "Gemma & Mistral host a Bot-cast"
-#time python3 GenBotcast.py --host gemma:7b --guest mistral > bot-cast_gemma_v_mistral.txt
+echo "llama3 & Mistral host a Bot-cast"
+time python3 GenBotcast.py --host llama3 --guest mistral > bot-cast_llama_v_mistral.txt
 
 echo "DeepSeek & Mistral host a Bot-cast"
-#time python3 GenBotcast.py --host deepseek-r1:8b --guest mistral --lint > bot-cast_deepseek_v_mistral.txt
+time python3 GenBotcast.py --host deepseek-r1:8b --guest mistral --lint > bot-cast_deepseek_v_mistral.txt
