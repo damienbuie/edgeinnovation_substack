@@ -56,10 +56,10 @@ done
 echo "Running the Bot-Casts!"
 
 echo "Mistal & Mistral host a Bot-cast"
-#time python3 GenBotcast.py --host gemma --guest mistral > bot-cast_mistral_v_mistral.txt
+time python3 GenBotcast.py --host gemma --guest mistral > bot-cast_mistral_v_mistral.txt
 
 echo "Gemma & Mistral host a Bot-cast"
-#time python3 GenBotcast.py --host gemma --guest mistral > bot-cast_gemma_v_mistral.txt
+time python3 GenBotcast.py --host gemma --guest mistral > bot-cast_gemma_v_mistral.txt
 
 echo "DeepSeek & Mistral host a Bot-cast"
-#time python3 GenBotcast.py --host deepseek-r1:8b --guest mistral --lint > bot-cast_deepseek_v_mistral.txt
+time python3 GenBotcast.py --host deepseek-r1:8b --guest mistral --lint > bot-cast_deepseek_v_mistral.txt
